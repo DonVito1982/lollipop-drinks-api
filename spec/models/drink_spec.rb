@@ -8,7 +8,13 @@ RSpec.describe Drink, type: :model do
       }.to change { Drink.count }.by(1)
     end
 
-    it "checks missing parameters" do
+    it "checks missing serving count" do
+      expect {
+        Drink.create(name: "Some drink", serv_caffeine: 26)
+      }.to raise_error(ActiveRecord::NotNullViolation)
+    end
+
+    it "checks missing serving caffeine" do
       expect {
         Drink.create(name: "Some drink", serv_count: 2)
       }.to raise_error(ActiveRecord::NotNullViolation)
