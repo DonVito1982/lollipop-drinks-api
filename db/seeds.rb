@@ -8,11 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 initial_drinks = [
-  {name: "Monster Ultra Sunrise", serv_count: 2, serv_caffeine: 75},
-  {name: "Black Coffee", serv_count: 1, serv_caffeine: 95},
-  {name: "Americano", serv_count: 1, serv_caffeine: 77},
-  {name: "Sugar free NOS ", serv_count: 2, serv_caffeine: 130},
-  {name: "5 Hour Energy", serv_count: 1, serv_caffeine: 200},
+  { name: "Monster Ultra Sunrise", serv_count: 2, serv_caffeine: 75 },
+  { name: "Black Coffee", serv_count: 1, serv_caffeine: 95 },
+  { name: "Americano", serv_count: 1, serv_caffeine: 77 },
+  { name: "Sugar free NOS ", serv_count: 2, serv_caffeine: 130 },
+  { name: "5 Hour Energy", serv_count: 1, serv_caffeine: 200 }
 ]
 
 initial_drinks.each do |drink_attrs|
