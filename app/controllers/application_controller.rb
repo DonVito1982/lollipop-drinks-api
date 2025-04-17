@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authorized
-  TOKEN_MINUTES = 1
+  TOKEN_MINUTES = 4
 
   def encode_token(payload)
     payload[:exp] = Time.now.to_i + 60 * TOKEN_MINUTES
@@ -23,6 +23,7 @@ class ApplicationController < ActionController::API
     if decoded_token
       user_id = decoded_token[0]["user_id"]
       @user = User.find(user_id)
+      @user.alive_sessions.count > 0 ? @user : nil
     end
   end
 
