@@ -5,7 +5,7 @@ RSpec.describe "Drinks", type: :request do
     let(:url) { "/drinks" }
 
     context "Unauthenticated request" do
-      it "Checks user's drinks" do
+      it "Does not check drinks" do
         get url
         expect(response).to have_http_status :unauthorized
       end
