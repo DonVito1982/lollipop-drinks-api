@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create!(user_params)
+    @user.create_fresh_session
     @token = encode_token(user_id: user.id)
     render json: {
       user: UserSerializer.new(user),
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :password)
+    params.permit(:username, :password, :first_name, :last_name)
   end
 
   def handle_invalid_record(e)

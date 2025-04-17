@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :sessions
+  has_many :sessions, dependent: :destroy
   validates :username, uniqueness: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   def alive_sessions
     sessions.where("expires_at > ?", Time.now)
