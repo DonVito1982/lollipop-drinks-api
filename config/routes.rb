@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_drinks, only: %i[index create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -7,8 +8,11 @@ Rails.application.routes.draw do
 
   post "/users", to: "users#create"
   get "/me", to: "users#me"
+  get "/caffeine-count", to: "users#caffeine_count"
   post "/auth/login", to: "auth#login"
   post "/auth/logout", to: "auth#logout"
+
+  get "/drinks", to: "drinks#index"
 
   # Defines the root path route ("/")
   # root "posts#index"
