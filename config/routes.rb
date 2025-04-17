@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   post "/users", to: "users#create"
   get "/me", to: "users#me"
+  get "/caffeine-count", to: "users#caffeine_count"
   post "/auth/login", to: "auth#login"
   post "/auth/logout", to: "auth#logout"
 
