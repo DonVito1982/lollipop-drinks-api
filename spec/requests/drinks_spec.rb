@@ -28,6 +28,12 @@ RSpec.describe "Drinks", type: :request do
         expect(parsed_body["caffeine_status"]["last_day"].to_f)
           .to be_within(0.001)
           .of(total_caffeine)
+        left_caffeine = 500 - total_caffeine
+        expected_drinks_left = {
+          drink1.id.to_s => (left_caffeine / (drink1.serv_caffeine * drink1.serv_count)).floor,
+          drink2.id.to_s => (left_caffeine / (drink2.serv_caffeine * drink2.serv_count)).floor
+        }
+        expect(parsed_body["drinks_left"]). to eq expected_drinks_left
       end
     end
   end

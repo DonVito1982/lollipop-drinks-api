@@ -11,6 +11,6 @@ RSpec.describe UserDrink, type: :model do
       create(:user_drink, user: user, drink: drink)
     end
 
-    expect(user.recent_drinks.count).to eq user_drinks + 1
+    expect(UserDrink.recent_drinks(user).count).to eq user_drinks + 1
   end
 end

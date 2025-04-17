@@ -9,10 +9,6 @@ class User < ApplicationRecord
 
   MAX_DAILY_CAFFEINE = 500
 
-  def recent_drinks
-    user_drinks.where("created_at > ?", 1.day.ago)
-  end
-
   def alive_sessions
     sessions.where("expires_at > ?", Time.now)
   end
@@ -24,12 +20,5 @@ class User < ApplicationRecord
   def create_fresh_session
     close_live_sessions
     sessions.create(expires_at: Time.now + Session::DEFAULT_MINS.minutes)
-  end
-
-  def caffeine_status
-    recent_caffeine = recent_drinks.reduce(0) do |sum, user_drink|
-      sum += user_drink.drink.serv_count * user_drink.drink.serv_caffeine
-    end
-    { last_day: recent_caffeine, left: MAX_DAILY_CAFFEINE - recent_caffeine }
   end
 end

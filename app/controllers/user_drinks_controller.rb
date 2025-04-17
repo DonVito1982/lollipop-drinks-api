@@ -1,14 +1,14 @@
 class UserDrinksController < ApplicationController
   # GET /user_drinks
   def index
-    @user_drinks = current_user.recent_drinks
+    @user_drinks = UserDrink.recent_drinks(current_user)
 
     render json: @user_drinks
   end
 
   # POST /user_drinks
   def create
-    @user_drink = current_user.user_drinks.create(user_drink_params)
+    @user_drink = UserDrink.create(user_drink_params.merge(user: current_user))
 
     if @user_drink.save
       render json: @user_drink, status: :created
