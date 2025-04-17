@@ -12,11 +12,24 @@ RSpec.describe "Users", type: :request do
           last_name: "Beckham"
         }
       end
+      let(:parsed_body) { ActiveSupport::JSON.decode(response.body).symbolize_keys }
 
       it "Creates user" do
         expect {
           post url, params: user_params
         }.to change { User.count }.by(1)
+      end
+
+      it "responds with 201" do
+        post url, params: user_params
+        expect(response).to have_http_status :created
+      end
+
+      it "responds with new user information" do
+        post url, params: user_params
+        expect(parsed_body[:user]).to include("username" => "some_username")
+        expect(parsed_body[:token]).to_not be_nil
+        expect(parsed_body[:token].split(".").length).to eq 3
       end
     end
   end
