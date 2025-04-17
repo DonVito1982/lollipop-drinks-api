@@ -5,7 +5,7 @@ module Authentication
     base.class_eval do
       include InstanceMethods
     end
-  end 
+  end
 
   module InstanceMethods
     def create_session_token(user)
