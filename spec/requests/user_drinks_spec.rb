@@ -49,13 +49,6 @@ RSpec.describe "/user_drinks", type: :request do
           params: { drink_id: drink.id }, headers: authenticated_header(user)
         }.to change(UserDrink, :count).by(1)
       end
-
-      # it "renders a JSON response with the new user_drink" do
-      #   post user_drinks_url,
-      #        params: { user_drink: valid_attributes }, headers: valid_headers, as: :json
-      #   expect(response).to have_http_status(:created)
-      #   expect(response.content_type).to match(a_string_including("application/json"))
-      # end
     end
 
     context "without authentication" do
