@@ -6,7 +6,7 @@ RSpec.describe "Users", type: :request do
     context "When creating users" do
       let(:user_params) do
         {
-          username: "some_username",
+          username: Faker::Internet.username,
           password: "secret%23",
           first_name: "David",
           last_name: "Beckham"
@@ -27,7 +27,7 @@ RSpec.describe "Users", type: :request do
 
       it "responds with new user information" do
         post url, params: user_params
-        expect(parsed_body[:user]).to include("username" => "some_username")
+        expect(parsed_body[:user]).to include("username" => user_params[:username])
         expect(parsed_body[:token]).to_not be_nil
         expect(parsed_body[:token].split(".").length).to eq 3
       end
