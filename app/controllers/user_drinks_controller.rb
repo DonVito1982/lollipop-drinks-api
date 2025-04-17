@@ -1,5 +1,4 @@
 class UserDrinksController < ApplicationController
-
   # GET /user_drinks
   def index
     @user_drinks = current_user.recent_drinks

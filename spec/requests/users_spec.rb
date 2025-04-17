@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  describe "GET /caffeine-count"do
-    let(:url) { "/caffeine-count"}
+  describe "GET /caffeine-count" do
+    let(:url) { "/caffeine-count" }
 
     context "With an authenticated request" do
       let(:user) { create(:user) }
