@@ -15,11 +15,6 @@ class UsersController < ApplicationController
   def me
     render json: current_user, status: :ok
   end
-
-  def caffeine_count
-    render json: current_user.caffeine_status, status: :ok
-  end
-
   private
 
   def user_params
