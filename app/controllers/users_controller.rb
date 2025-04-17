@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create!(user_params)
-    @user.create_fresh_session
+    user.create_fresh_session
     @token = encode_token(user_id: user.id)
     render json: {
       user: UserSerializer.new(user),
