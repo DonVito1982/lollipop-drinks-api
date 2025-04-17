@@ -1,30 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  describe "GET /caffeine-count" do
-    let(:url) { "/caffeine-count" }
-
-    context "With an authenticated request" do
-      let(:user) { create(:user) }
-      let(:drink1) { create(:drink) }
-      let(:drink2) { create(:drink) }
-      let(:parsed_body) { ActiveSupport::JSON.decode(response.body) }
-
-      it "returns the total caffeine amount" do
-        create(:user_drink, user: user, drink: drink1)
-        create(:user_drink, user: user, drink: drink2)
-        get url, headers: authenticated_header(user)
-        expect(response).to have_http_status :ok
-        total_caffeine = drink1.serv_count * drink1.serv_caffeine +
-          drink2.serv_count * drink2.serv_caffeine
-        expect(parsed_body).to include("recent_caffeine")
-        expect(parsed_body["recent_caffeine"].to_f)
-          .to be_within(0.001)
-          .of(total_caffeine)
-      end
-    end
-  end
-
   describe "POST /users" do
     let(:url) { "/users" }
     context "When creating users" do

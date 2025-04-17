@@ -30,6 +30,6 @@ class User < ApplicationRecord
     recent_caffeine = recent_drinks.reduce(0) do |sum, user_drink|
       sum += user_drink.drink.serv_count * user_drink.drink.serv_caffeine
     end
-    { recent_caffeine: recent_caffeine, left: MAX_DAILY_CAFFEINE - recent_caffeine }
+    { last_day: recent_caffeine, left: MAX_DAILY_CAFFEINE - recent_caffeine }
   end
 end
