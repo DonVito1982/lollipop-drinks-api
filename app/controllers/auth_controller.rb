@@ -6,6 +6,7 @@ class AuthController < ApplicationController
     @user = User.find_by!(username: login_params[:username])
     if @user.authenticate(login_params[:password])
       @token = encode_token(user_id: @user.id)
+      @user.create_fresh_session
       render json: {
         user: UserSerializer.new(@user),
         token: @token
@@ -13,6 +14,10 @@ class AuthController < ApplicationController
     else
       render json: { message: "Incorrect password" }, status: :unauthorized
     end
+  end
+
+  def logout
+    current_user.close_live_sessions
   end
 
   private
