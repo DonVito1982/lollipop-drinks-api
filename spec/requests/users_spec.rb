@@ -7,9 +7,9 @@ RSpec.describe "Users", type: :request do
       let(:user_params) do
         {
           username: Faker::Internet.username,
-          password: "secret%23",
-          first_name: "David",
-          last_name: "Beckham"
+          password: Faker::Internet.password,
+          first_name: Fake::Name.first_name,
+          last_name: Fake::Name.last_name
         }
       end
       let(:parsed_body) { ActiveSupport::JSON.decode(response.body).symbolize_keys }
