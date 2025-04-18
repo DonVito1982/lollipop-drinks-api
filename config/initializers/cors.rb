@@ -9,8 +9,6 @@ LOCALHOST_REGEX = %r{\Ahttp:\/\/localhost(:300\d)?\z}.freeze
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # it cannot be '*', not even for testing purposes
-    # because credentials won't work with that
     hosts = []
     hosts << LOCALHOST_REGEX if Rails.env.development?
     hosts.concat(ENV["CORS_ORIGINS"].split(",").map(&:strip)) if ENV.key?("CORS_ORIGINS")
