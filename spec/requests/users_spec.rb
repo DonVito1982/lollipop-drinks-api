@@ -8,8 +8,8 @@ RSpec.describe "Users", type: :request do
         {
           username: Faker::Internet.username,
           password: Faker::Internet.password,
-          first_name: Fake::Name.first_name,
-          last_name: Fake::Name.last_name
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name
         }
       end
       let(:parsed_body) { ActiveSupport::JSON.decode(response.body).symbolize_keys }
