@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authorized
-  TOKEN_MINUTES = 4
+  TOKEN_MINUTES = 120
 
   def encode_token(payload)
     payload[:exp] = Time.now.to_i + 60 * TOKEN_MINUTES

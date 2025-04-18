@@ -5,12 +5,19 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+LOCALHOST_REGEX = %r{\Ahttp:\/\/localhost(:300\d)?\z}.freeze
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "example.com"
+    hosts = []
+    hosts << LOCALHOST_REGEX if Rails.env.development?
+
+    origins hosts
 
     resource "*",
       headers: :any,
-      methods: [ :get, :post, :put, :patch, :delete, :options, :head ]
+      credentials: true,
+      methods: %i[get post put patch delete options head],
+      expose: %w[X-Page X-Per-Page X-Total Content-Disposition]
   end
 end
