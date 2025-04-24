@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  first_name      :string
+#  last_name       :string
+#  password_digest :string           not null
+#  username        :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 FactoryBot.define do
   factory :user do
     username { Faker::Internet.username }
