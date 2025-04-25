@@ -33,4 +33,29 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "GET /me" do
+    let(:url) { "/me" }
+
+    context "Unauthenticated request" do
+      it "Does not check drinks" do
+        get url
+        expect(response).to have_http_status :unauthorized
+      end
+    end
+
+    context "Authenticated request" do
+      let(:user) { create(:user) }
+      let(:parsed_body) { ActiveSupport::JSON.decode(response.body) }
+
+      it "checks available drinks" do
+        get url, headers: authenticated_header(user)
+        expect(response).to have_http_status :ok
+        expect(parsed_body).to include("first_name" => user.first_name)
+        expect(parsed_body).to include("last_name" => user.last_name)
+        expect(parsed_body).to include("id" => user.id)
+        expect(parsed_body).to include("username" => user.username)
+      end
+    end
+  end
 end

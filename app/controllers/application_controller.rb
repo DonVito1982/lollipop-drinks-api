@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
   def encode_token(payload)
     payload[:exp] = Time.now.to_i + 60 * TOKEN_MINUTES
-    JWT.encode(payload, "drinks2025")
+    JWT.encode(payload, ENV["JWT_PASSWORD"])
   end
 
   def decoded_token
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
     if header
       token = header.split(" ")[1]
       begin
-        JWT.decode(token, "drinks2025")
+        JWT.decode(token, ENV["JWT_PASSWORD"])
       rescue JWT::DecodeError
         nil
       end

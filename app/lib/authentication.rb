@@ -15,7 +15,7 @@ module Authentication
 
     def encode_jwt_token(payload)
       payload[:exp] = Time.now.to_i + 60 * TOKEN_MINUTES
-      JWT.encode(payload, "drinks2025")
+      JWT.encode(payload, ENV["JWT_PASSWORD"])
     end
   end
 end
